@@ -16,8 +16,8 @@ def calc_dist(xi,xj,yi,yj):
     distancia = math.sqrt(xx+yy)
     return distancia
 
-k=5
-
+k=7
+ciclos=20
 
 puntos = []
 
@@ -53,7 +53,7 @@ print("Centroides iniciales")
 print(centroide)
 
 iteracion = 1
-for l in range(0, 20):
+for l in range(0, ciclos):
 
     distancias = list()
     pertenece = 0
