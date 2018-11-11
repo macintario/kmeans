@@ -17,12 +17,12 @@ def calc_dist(xi,xj,yi,yj):
     return distancia
 
 k=7
-ciclos=20
+ciclos=8
 
 puntos = []
 
 max = 0
-with open("a150.csv") as losDatos:
+with open("a1000.csv") as losDatos:
     datos = csv.reader(losDatos,delimiter=',')
     for renglon in datos:
         x = int(renglon[0])
@@ -69,7 +69,7 @@ for l in range(0, ciclos):
                 dist_min=distancia
                 pertenece = n_centroide
             n_centroide += 1
-        print("Punto:"+str(x)+","+str(y)+" pertenece:"+str(pertenece)+" dist_min="+str(dist_min))
+        #print("Punto:"+str(x)+","+str(y)+" pertenece:"+str(pertenece)+" dist_min="+str(dist_min))
         plt.plot(x, y,color=colores[pertenece],marker='o',markersize=5)
         asignacion.append([n_punto, pertenece])
         n_punto += 1
