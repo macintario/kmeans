@@ -1,6 +1,6 @@
 import random
 import math
-
+import csv
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -16,20 +16,22 @@ def calc_dist(xi,xj,yi,yj):
     distancia = math.sqrt(xx+yy)
     return distancia
 
+k=5
 
 
-puntos =[
-    [1, 1],
-    [1, 3],
-    [2, 4],
-    [2, 2],
-    [2, 3],
-    [8, 6],
-    [7, 4],
-    [9, 6],
-    [7, 5],
-    [5, 8]
-    ]
+puntos = []
+
+max = 0
+with open("a150.csv") as losDatos:
+    datos = csv.reader(losDatos,delimiter=',')
+    for renglon in datos:
+        x = int(renglon[0])
+        y = int(renglon[1])
+        puntos.append([x,y])
+        if x > max:
+            max = x
+        if y > max:
+            max = y
 
 
 print(puntos)
@@ -38,13 +40,12 @@ for px, py in puntos:
     plt.setp(l,markersize=5)
 
 
-k=4
 
 centroide = list()
 
 for i in range(0, k):
-    cx=np.random.randint(0,10)
-    cy=np.random.randint(0,10)
+    cx=np.random.randint(0,max)
+    cy=np.random.randint(0,max)
     l=plt.plot(cx, cy,colores[i]+'x')
     plt.setp(l,markersize=15)
     centroide.append([cx, cy])
@@ -52,7 +53,7 @@ print("Centroides iniciales")
 print(centroide)
 
 iteracion = 1
-for l in range(0, 10):
+for l in range(0, 20):
 
     distancias = list()
     pertenece = 0
@@ -60,7 +61,7 @@ for l in range(0, 10):
     asignacion = list()
     print("Calculo de distacias y asigacion a clusters")
     for x, y in puntos:
-        dist_min = 1000
+        dist_min = max
         n_centroide = 0
         for i, j in centroide:
             distancia = calc_dist(i, x, j, y)
